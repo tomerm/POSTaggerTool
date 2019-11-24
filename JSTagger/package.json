@@ -1,0 +1,11 @@
+{
+  "name": "JSTagger",
+  "version": "0.0.1",
+  "main": "index.html",
+   "window": {
+    "toolbar": false,
+    "width": 1650,
+    "height": 900,
+    "resizable": false
+    }
+}

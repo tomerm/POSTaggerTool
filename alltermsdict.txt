@@ -1,0 +1,203 @@
+#Inflection
+None
+Absolute
+Construct
+AbsoluteConstruct
+Singular
+Singular_Masculine
+Singular_Feminine
+Dual
+Dual_Masculine
+Dual_Feminine
+Plural
+Plural_Masculine
+Plural_Feminine
+SingularPlural_Masculine
+SingularPlural_Feminine
+DualPlural_Masculine
+DualPlural_Feminine
+1_Singular
+1_Singular_Masculine
+1_Singular_Feminine
+1_Plural
+2_Singular
+2_Singular_Masculine
+2_Singular_Feminine
+2_Plural
+2_Plural_Masculine
+2_Plural_Feminine
+3_Singular
+3_Singular_Masculine
+3_Singular_Feminine
+3_Dual_Masculine
+3_Dual_Feminine
+3_Plural
+3_Plural_Masculine
+3_Plural_Feminine
+3_SingularPlural
+3_SingularPlural_Masculine
+3_SingularPlural_Feminine
+3_DualPlural_Masculine
+3_DualPlural_Feminine	
+
+#Gender
+None
+Masculine
+Feminine
+
+#Number
+None
+Singular
+Dual
+Plural
+SingularPlural
+DualPlural
+
+#Person
+None
+First
+Second
+Third
+
+#Tence
+None
+Past
+Future
+Imperative
+Jussive
+Cohortative
+Infinitive
+InfinitiveAbsolute
+Participle
+InfinitiveConstruct
+
+#Voice
+None
+Active
+Middle
+Passive
+
+#Elipsis
+None
+Abbreviation
+Initials
+Acronym
+
+#Groups
+Noun
+Pronoun
+Verb
+Adverb
+Adjective
+Adposition
+Interjection
+Conjustion
+Determiner
+Quantifier
+Punctuation
+Foreign
+Symbol
+Emotion
+Other
+
+#POS
++	Group: Noun.		           Clitic  Number  Gender  Person  Tense   Voice   Ellipsis
++	================================================================================
+3      |Noun               |NOUN   |X      |X      |X      |       |       |       |X
+31     |Type Name          |TYPE   |       |X      |X      |       |       |       |X
+32     |Proper Name        |PROP   |       |       |X      |       |       |       |X
+33     |DateTime           |TIME   |       |       |       |       |       |       |X
+34     |Title              |TITLE  |       |       |X      |       |       |       | 
+
++	Group: Pronoun.		           Clitic  Number  Gender  Person  Tense   Voice   Ellipsis
++	================================================================================
+1      |Pronoun            |PRON   |       |X      |X      |X      |       |       | 
+11     |Personal           |PRSNL  |       |X      |X      |X      |       |       | 
+12     |Demonstrative      |DMNST  |       |X      |X      |       |       |       | 
+13     |Reflexive          |REFLX  |       |X      |X      |X      |       |       | 
+14     |Impersonal         |IMPRS  |       |X      |X      |       |       |       | 
+15     |Interrogative      |INTRR  |       |X      |X      |       |       |       | 
+19     |Clitic             |CLIT   |       |X      |X      |X      |X      |       | 
+
++	Group: Verb.		           Clitic  Number  Gender  Person  Tense   Voice   Ellipsis
++	================================================================================
+2      |Verb               |VERB   |X      |X      |X      |X      |X      |X      |X
+21     |Auxiliary          |AUX    |       |X      |X      |X      |X      |       |X
+22     |Existential        |EXIST  |       |X      |X      |X      |X      |       |X
+23     |Copula             |COP    |       |X      |X      |X      |X      |       | 
+24     |Infinitive         |INF    |       |       |       |       |       |       | 
+25     |InfinitiveAbsolute |INFABS |       |       |       |       |       |       | 
+26     |Participle         |PART   |X      |X      |X      |       |       |X      |X
+27     |InfinitiveConstruct|INFCON |X      |       |       |       |       |       | 
+28     |Modal              |MOD    |X      |X      |X      |X      |X      |       |X
+
++	Group: Adverb.		           Clitic  Number  Gender  Person  Tense   Voice   Ellipsis
++	================================================================================
+5      |Adverb             |ADV    |       |       |       |       |       |       | 
+50     |AdverbialPronoun   |ADVPR  |       |       |       |       |       |       | 
+51     |AdverbVerb         |ADVER  |       |       |       |       |       |       | 
+52     |Modulator          |ADMOD  |       |       |       |       |       |       | 
+53     |AdverbSentence     |ADSEN  |       |       |       |       |       |       | 
+54     |Qualifier          |QUAL   |       |       |       |       |       |       |X
+55     |Prefix             |PREF   |       |       |       |       |       |       | 
+56     |Negation           |NEG    |       |X      |X      |X      |       |       | 
+57     |AdverbSpatial      |ADSPT  |       |       |       |       |       |       | 
+58     |AdverbDirective    |ADDIR  |       |       |       |       |       |       | 
+59     |AdverbTemporal     |ADTEM  |       |       |       |       |       |       | 
+
++	Group: Adjective.	           Clitic  Number  Gender  Person  Tense   Voice   Ellipsis
++	================================================================================
+4      |Adjective          |ADJ    |X      |X      |X      |       |       |       |X
+41     |Ordinal            |ORDNL  |       |X      |X      |       |       |       |X
+42     |AdverbialAdjective |ADADJ  |       |X      |X      |       |       |       |X
+
++	Group: Adposition.	           Clitic  Number  Gender  Person  Tense   Voice   Ellipsis
++	================================================================================
+6      |Adposition         |ADP    |       |       |       |       |       |       | 
+61     |Preposition        |PREP   |X      |       |       |       |       |       | 
+62     |PrepositionSubClause|PREPSUB|X     |       |       |       |       |       | 
+
++	Group: Interjection.	       Clitic  Number  Gender  Person  Tense   Voice   Ellipsis
++	================================================================================
+7      |Interjection       |INTJ   |       |       |       |       |       |       | 
+
++	Group: Conjunction.	           Clitic  Number  Gender  Person  Tense   Voice   Ellipsis
++	================================================================================
+8      |Conjunction        |CONJ   |       |       |       |       |       |       | 
+81     |Coordinator        |COORD  |       |       |       |       |       |       | 
+82     |Subordinator       |SUB    |       |       |       |       |       |       | 
+83     |Conditional        |COND   |       |       |       |       |       |       | 
+84     |SubordinatorTemporal|SUBTEM|       |       |       |       |       |       | 
+
++	Group: Determiner.	           Clitic  Number  Gender  Person  Tense   Voice   Ellipsis
++	================================================================================
+9      |Determiner         |DET    |       |X      |X      |       |       |       | 
+91     |Article            |ART    |       |       |       |       |       |       | 
+
++	Group: Quantifier.	           Clitic  Number  Gender  Person  Tense   Voice   Ellipsis
++	================================================================================
+10     |Quantifier         |QUANT  |       |       |       |       |       |       |X
+101    |WordNumber         |WRDNM  |X      |       |       |       |       |       |X
+102    |Literal            |LIT    |       |       |       |       |       |       | 
+103    |LetterNumber       |LETNM  |       |       |       |       |       |       | 
+
++	Group: Punctuation.	           Clitic  Number  Gender  Person  Tense   Voice   Ellipsis
++	================================================================================
+111    |Punctuation        |PUNCT  |       |       |       |       |       |       | 
+
++	Group: Foreign.		           Clitic  Number  Gender  Person  Tense   Voice   Ellipsis
++	================================================================================
+112    |Foreign            |FRN    |       |       |       |       |       |       | 
+
++	Group: Symbol.		           Clitic  Number  Gender  Person  Tense   Voice   Ellipsis
++	================================================================================
+113    |Symbol             |SYM    |       |       |       |       |       |       | 
+
++	Group: Emoticon.	           Clitic  Number  Gender  Person  Tense   Voice   Ellipsis
++	================================================================================
+114    |Emoticon           |EMOT   |       |       |       |       |       |       | 
+
++	Group: Other.		           Clitic  Number  Gender  Person  Tense   Voice   Ellipsis
++	================================================================================
+115    |Other              |OTHR   |       |       |       |       |       |       | 
+116    |URL                |URL    |       |       |       |       |       |       | 

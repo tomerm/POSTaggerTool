@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSTagger</title>
+<script src="./js/main.js"></script>
+<script src="./js/tsv.js"></script>
+<script src="./js/display.js"></script>
+<script src="./js/tools.js"></script>
+<link href="./css/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body onload='initContent()'>
+<div id='mainPanel' style="min-height: 850px;">
+<div id="toolBar" style='height: 30px; marign-left: 10px;'> 
+<ul id="mainMenu">
+    <li id="fileMenu"><a href='#' class="mainMenuItem" onclick="menuDropdown(this)">File</a>
+    	<div class="dropdown">
+ 			<div class="dropdown-content">
+    			<a href="#" onclick='loadTSV()'>Load TSV file <input type="file" id="tsvID" style="display:none"/></a>
+    			<a href="#" onclick='loadDoc("listofdocuments")'>Load document from DB <input type="file" id="dbdocID" style="display:none"/></a>
+    			<a href="#" onclick='loadDoc("removedocument")'>Remove document from DB <input type="file" id="dbremID" style="display:none"/></a>
+    			<a href="#" onclick='readDB(2)'>Remove all documents</a>
+    			<a href="#" onclick='saveTSV()'>Save document in TSV format <input type="file" id="loadtsvID" nwsaveas style="display:none"/></a>
+    			<a href="#" onclick='saveTXT()'>Save content of the document in text file <input type="file" id="loadtxtID" nwsaveas style="display:none"/></a>
+    			<a href="#" onclick='loadTXT()'>Load text file <input type="file" id="txtID" style="display:none"/></a>
+    			<a href="#" onclick='clearScreen()'>Clear Screen</a>
+    			<a href="#" onclick='endApp()'>Exit</a>
+  			</div>
+		</div>
+	</li>
+    <li id="settingsMenu"><a href="#" class="mainMenuItem" onclick="menuDropdown(this)">Settings</a>
+    	<div class="dropdown">
+ 			<div class="dropdown-content">
+    			<a href="#">Lines on the page (1-10): <input id="pagelines" style="margin-left:19px; text-align: center;" onkeypress="endSettings()" size=1/> </a>
+    			<a href="#">Font size (100-200%): <input id="fontsize" style="margin-left:36px; text-align: center;" onkeypress="endSettings()" size=1/> </a>
+    			<a href="#" onclick='highlightActive()'>Highlight active token (on/off) </a>
+    			<a href="#" onclick='showHideBorders()'>Show/Hide borders </a>
+    			<a href="#" onclick='showUserMarks()'>Show user's marks (on/off) </a> 
+    			<a href="#" onclick='showAppMarks()'>Show application marks (on/off) </a>   			   			
+  			</div>
+		</div>    
+    </li>
+    <li id="helpMenu"><a href="#" class="mainMenuItem" onclick="menuDropdown(this)">Help</a>
+        <div class="dropdown">
+ 			<div class="dropdown-content" style="width: 500px;">
+    			<a href="#" class="bolditem">Functional buttons used in this application: </a>
+    			<a href="#"><b>F1</b>&nbsp;&nbsp;&nbsp;&nbsp;Move focus to the Working Area, go to the next token </a>
+    			<a href="#"><b>F2</b>&nbsp;&nbsp;&nbsp;&nbsp;Move focus to the Control Panel </a>
+    			<a href="#"><b>F3</b>&nbsp;&nbsp;&nbsp;&nbsp;Insert new token after active, move focus to the Control Panel </a>
+    			<a href="#"><b>F4</b>&nbsp;&nbsp;&nbsp;&nbsp;Insert new token before active, move focus to the Control Panel </a>
+    			<a href="#"><b>F5</b>&nbsp;&nbsp;&nbsp;&nbsp;Delete active token, go to the next token </a>
+    			<a href="#"><b>F6</b>&nbsp;&nbsp;&nbsp;&nbsp;Split active token, stay on the new token </a>
+    			<a href="#"><b>F7</b>&nbsp;&nbsp;&nbsp;&nbsp;Delete current line and go to the previous </a>
+    			<a href="#"><b>F8</b>&nbsp;&nbsp;&nbsp;&nbsp;Insert line after current and move focus to the Control Panel </a>
+    			<a href="#"><b>F9</b>&nbsp;&nbsp;&nbsp;&nbsp;Remove user's mark from active token and move focus to the Working Area, go to the next token </a>
+    			<a href="#"><b>F10</b>&nbsp;&nbsp;&nbsp;Set red user's mark on active token and move focus to the Working Area, go to the next token </a>
+    			<a href="#"><b>F11</b>&nbsp;&nbsp;&nbsp;Set pink user's mark on active token and move focus to the Working Area, go to the next token </a>
+    			<a href="#"><b>F12</b>&nbsp;&nbsp;&nbsp;Set green user's mark on active token and move focus to the Working Area, go to the next token </a>
+    			<a href="#"><b>Esc</b>&nbsp;&nbsp;&nbsp;Move focus to the Working Area, stay on the same token </a>
+    			<a href="#"></a>
+  			</div>
+		</div>    
+    </li>
+</ul>
+<div id="docname" style="display:inline-block; position: relative; font-weight:bold; left: 500px;"></div>
+</div>  <!-- tool bar -->
+<div class="box" style="height: 820px; display: flex; flex-flow: row; align-content: stretch; border-style: double; border-color: gray; border-radius: 5px; padding: 0px; margin: 0px 20px 0px 20px;">
+<div id="workPanel" class="workPanel" style="flex: 3 1.2;">
+<div id="workArea" style="width: 100%; height: 100%;"></div>
+</div>
+<div class="toolsPanel" style="flex: 1.2 3; background: #F0F0F0; border-left: double; border-left-color: gray; border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
+<div>
+   <fieldset>
+      <legend style="color:blue;font-weight:bold;">Selected Text</legend>
+      <table width="100%">
+         <tr>
+            <td>Text:</td>
+            <td style="width=67%;"><input type="text" id="selectedText" style="width:100%; font-weight: bold; font-size: 120%;" dir="auto" onchange="updateActive(this)" onfocus="setSpanInEdit(true);"/></td>
+         </tr>
+         <tr>
+            <td>Line number:</td>
+            <td><input type="text" id="lineNumber" style="width:100%; background-color: #F9F9F9;" tabindex="-1" readonly/></td>
+         </tr>
+         <tr>
+            <td>Position:</td>
+            <td><input type="text" id="textPosition" style="width:100%; background-color: #F9F9F9;" tabindex="-1" readonly/></td>
+         </tr>
+         <tr>
+            <td>Length:</td>
+            <td><input type="text" id="textLength" style="width:100%; background-color: #F9F9F9;" tabindex="-1" readonly/></td>
+         </tr>
+         <tr>
+            <td>Not separated:</td>
+            <td><input type="checkbox" id="notsep" tabindex="-1" style="width: 25px; height:25px; left: -5px; position: relative;" onclick="updateNotSeparated(this)" /></td>
+         </tr>                  
+      </table>
+   </fieldset>
+</div>
+<br/>
+<div>
+   <fieldset>
+      <legend style="color:blue;font-weight:bold;">Regular Features</legend>
+      <table width="100%">
+         <tr>
+            <td>Lemma:</td>
+            <td style="width:67%"><input type="text" id="lemma" style="width:100%; font-size: 120%;" dir="auto" onchange="updateActive(this)" onfocus="setSpanInEdit(true);"/></td>
+         </tr>
+         <tr>
+            <td>Vocalized Form H:</td>
+            <td><input type="text" id="vfh" style="width:100%; font-size: 120%;" dir="auto" onchange="updateActive(this)" onfocus="setSpanInEdit(true);"/></td>
+         </tr>
+         <tr>
+            <td>Vocalized Form L:</td>
+            <td><input type="text" id="vfl" style="width:100%; font-size: 120%;" dir="ltr" onchange="updateActive(this)" onfocus="setSpanInEdit(true);"/></td>
+         </tr>
+      </table>
+   </fieldset>
+</div>
+<br/>
+<div>
+   <fieldset>
+      <legend style="color:blue;font-weight:bold;">Configurable Features</legend>
+      <table width="100%">
+         <tr>
+            <td style="width:25%;">POS group:</td>
+            <td style="width:70%;">
+            	<select id="groups" style="width:100%;" onchange="markPosGroup(this)" onfocus="setSpanInEdit(true);">
+            		<option name='empty' value="">Not selected</option>
+            	</select>
+            </td>
+            <td><button name="groups" class="bfs" tabindex="-1" onclick="setNotSelected(this)" onfocus="setSpanInEdit(true);">-</button>
+         </tr>
+         <tr>
+            <td id="tdpos">Part of speech:</td>
+            <td>            
+            	<select id="pos" style="width:100%;" onchange="updateActive(this)" onfocus="setSpanInEdit(true);">
+            		<option name='empty' value="">Not selected</option>
+            	</select>
+            </td>
+            <td><button name="pos" class="bfs" tabindex="-1" onclick="setNotSelected(this)" onfocus="setSpanInEdit(true);">-</button>            
+         </tr>
+         <tr>
+            <td id="tdinflection">Clitic:</td>
+            <td>
+            	<select id="inflection" style="width:100%;" onchange="updateActive(this)" onfocus="setSpanInEdit(true);">
+            		<option name='empty' value="">Not selected</option>
+            	</select>            
+            </td>
+            <td><button name="inflection" class="bfs" tabindex="-1" onclick="setNotSelected(this)" onfocus="setSpanInEdit(true);">-</button>
+         </tr>
+         <tr>
+            <td id="tdgender">Gender:</td>
+            <td>
+            	<select id="gender" style="width:100%;" onchange="updateActive(this)" onfocus="setSpanInEdit(true);">
+            		<option name='empty' value="">Not selected</option>
+            	</select>                        
+            </td>
+            <td><button name="gender" class="bfs" tabindex="-1" onclick="setNotSelected(this)" onfocus="setSpanInEdit(true);">-</button>            
+         </tr>
+         <tr>
+            <td id="tdnumber">Number:</td>
+            <td>
+            	<select id="number" style="width:100%;" onchange="updateActive(this)" onfocus="setSpanInEdit(true);">
+            		<option name='empty' value="">Not selected</option>
+            	</select>                        
+            </td>
+            <td><button name="number" class="bfs" tabindex="-1" onclick="setNotSelected(this)" onfocus="setSpanInEdit(true);">-</button>            
+         </tr>
+         <tr>
+            <td id="tdperson">Person:</td>
+            <td>
+            	<select id="person" style="width:100%;" onchange="updateActive(this)" onfocus="setSpanInEdit(true);">
+            		<option name='empty' value="">Not selected</option>
+            	</select>                        
+            </td>
+            <td><button name="person" class="bfs" tabindex="-1" onclick="setNotSelected(this)" onfocus="setSpanInEdit(true);">-</button>            
+         </tr>
+         <tr>
+            <td id="tdtence">Tence:</td>
+            <td>
+            	<select id="tence" style="width:100%;" onchange="updateActive(this)" onfocus="setSpanInEdit(true);">
+            		<option name='empty' value="">Not selected</option>
+            	</select>                        
+            </td>
+            <td><button name="tence" class="bfs" tabindex="-1" onclick="setNotSelected(this)" onfocus="setSpanInEdit(true);">-</button>            
+         </tr>         
+          <tr>
+            <td id="tdvoice">Voice:</td>
+            <td>
+            	<select id="voice" style="width:100%;" onchange="updateActive(this)" onfocus="setSpanInEdit(true);">
+            		<option name='empty' value="">Not selected</option>
+            	</select>                        
+            </td>
+            <td><button name="voice" class="bfs" tabindex="-1" onclick="setNotSelected(this)" onfocus="setSpanInEdit(true);">-</button>            
+         </tr>         
+         <tr>
+            <td id="tdelipsis">Elipsis:</td>
+            <td>
+            	<select id="elipsis" style="width:100%;" onchange="updateActive(this)" onfocus="setSpanInEdit(true);">
+            		<option name='empty' value="">Not selected</option>
+            	</select>                        
+            </td>
+            <td><button name="elipsis" class="bfs" tabindex="-1" onclick="setNotSelected(this)" onfocus="setSpanInEdit(true);">-</button>            
+         </tr>
+         <tr style="height:15px;"></tr>
+         <tr>
+         	<td style="width:40%;">Reload configuration from file:</td>
+         	<td><input type="file" id="fileID" tabindex="-1"/></td>        
+      </table>
+   </fieldset>
+</div>
+</div>
+</div>  <!-- box -->
+<div class='messagePanel'></div>
+</div>
+<div id="status"></div>
+<button id="getresults" onclick="canGetResults(this)" style="display:none"></button>
+</div>  <!-- main panel -->
+<div>
+
+</body>
+</html>
+
+<!-- 
+   <h1>Hello World!</h1>
+    We are using node.js <script>document.write(process.version)</script>.
+-->

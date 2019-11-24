@@ -1,0 +1,223 @@
+@CHARSET "UTF-8";
+
+#mainPanel {
+    background-color: #f9f9f9;	
+}
+
+#workArea {
+	overflow-y: auto;
+	font-family: arial;	
+}
+
+.toolsPanel.infocus {
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.9);	
+}
+
+ul#mainMenu {
+	margin: 0;
+	margin-left: 13px;
+	padding:0;
+}
+
+ul#mainMenu li {
+display:block;
+float:left;
+position: relative;
+padding:0 10px;
+}
+
+.dropdown {
+	position: absolute;
+	display: inline-block;
+	bottom: -7px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 260px;
+    background: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown-content.show-dropdown {display: block;}
+
+.bolditem {
+	font-weight: bold;
+	font-size: 105%;
+}
+
+#dialog {
+	position: relative;
+	width: 300px;
+	min-width: 200px;
+	min-height: 100px;
+	top: 200px;
+	left: 500px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.8);
+	text-shadow: rgba(0,0,0,.4) 0 1px 0;
+	display: none;
+}
+
+#dialog.opened {
+	display: flex; 
+	flex-flow: column; 
+	align-content: stretch;
+}
+
+#dialog p {
+	text-align:center;
+	padding: 20px 0px;
+	flex: 3 1;
+}
+
+#dialog div {
+	text-align:center;
+	padding: 20px 0px;
+	flex: 1 3
+	text-align: center;
+}
+
+#dialog .dialogButton {
+	width: 60px;
+	height: 30px;
+	background: white;
+	text-align: center;
+	border-color: gray;
+	margin: 0 5px;
+	display: inline-block;
+	border-radius: 4px;
+    box-shadow: rgba(0,0,0,1) 0 1px 0;
+    text-shadow: rgba(0,0,0,.4) 0 1px 0;
+}
+
+.bfs {
+	width: 100%;
+	text-align: center;
+}
+
+input[type='file'] {
+	padding: 15px;
+	color: blue;
+}
+
+#status {
+	padding: 5px 20px;
+}
+
+#workArea {
+	direction: rtl;
+}
+
+.linecontentdiv {
+	display: inline-block;
+	width: 95%
+}
+
+.linenum {
+	color: gray;
+	margin-left: 15px;
+	margin-right: 10px;
+	width: 30px;
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.para.showborder {
+	line-height: 1.5;
+}
+
+.para {
+	line-height: 1.4;
+}
+
+.token.active {
+	background: #FFD700;
+	border: 2px solid black;
+	padding: 2px 2px 2px 2px;
+}
+
+.token.insplit {
+	font-size: 240%;
+	border: 3px double black;
+}
+
+.token.showborder {
+	border: 2px solid black;
+	padding: 2px 2px 2px 2px;
+}
+
+.token.insplit.showborder {
+	border: 3px double black;
+}
+
+#workArea.usermarks .token.userred, #workArea.appmarks .token.appred {
+	background: #FF6699; 
+}
+
+#workArea.usermarks .token.userpink {
+	background: #FFCCCC; 
+}
+
+#workArea.appmarks .token.apppink {
+	background: #FFCC66; 
+}
+
+#workArea.usermarks .token.usergreen, #workArea.appmarks .token.appgreen {
+	background: #99FFCC; 
+}
+
+#workArea.usermarks .token.active {
+	background: #FFD700;
+}
+
+select.error {
+	color: red;
+}
+
+.outofgroup {
+	background-color: #FFFF80;
+}
+
+td.notinuse {
+	text-decoration: line-through;
+}
+
+#lemma.error {
+	border-color: red;
+}
+
+#selectedText.updated {
+	border-color: yellow;
+}
+
+.dialogbtn {
+	width: 15%;
+	height: 30px;
+	margin: 0px 10px 0px 10px;
+	padding: 2px 2px 2px 2px;
+} 
+
+.dialogbtnpanel {
+	position: absolute;
+	bottom: 40px;
+	left: 140px;
+}
+
+.dialogbtnpanel.tsv {
+	bottom: 15px;
+}
+
+#customDialog {
+	background-color: white;
+}
